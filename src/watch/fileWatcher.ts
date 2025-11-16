@@ -45,10 +45,11 @@ export class FileWatcher {
 		const task = this.task;
 		const isLinux = platform() === 'linux';
 		const isFreeBSD = platform() === 'freebsd';
+		const isNetBSD = platform() === 'netbsd';
 		const isTransformDependency = transformWatcherId !== null;
 		const handleChange = (id: string, event: ChangeEvent) => {
 			const changedId = transformWatcherId || id;
-			if (isLinux || isFreeBSD) {
+			if (isLinux || isFreeBSD || isNetBSD) {
 				// unwatching and watching fixes an issue with chokidar where on certain systems,
 				// a file that was unlinked and immediately recreated would create a change event
 				// but then no longer any further events
